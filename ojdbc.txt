@@ -43,6 +43,23 @@ public class ojdbcconnection
 
 		}
 	}
+	
+	public static String getproperties(String Filenm1) throws IOException
+
+	{
+
+		Properties prop = new Properties();
+
+		FileInputStream input = new FileInputStream(Filenm1);
+		prop.load(input);
+		String puserid = prop.getProperty("userid");
+		String ppassword = prop.getProperty("password");
+		String ph1 = prop.getProperty("H1");
+		String purl = prop.getProperty("url");
+		String retrec1 = puserid + "," + ppassword + "," + ph1 + "," + purl;
+		return retrec1;
+
+	}
 
 	
 
