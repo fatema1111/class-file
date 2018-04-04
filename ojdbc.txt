@@ -1,0 +1,49 @@
+public class ojdbcconnection
+
+{
+	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+	static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	// Database credentials
+	static final String USER = "project";
+	static final String PASS = "project";
+	static final String tblnm = "Orders";
+
+	public static void main(String[] args) throws IOException {
+
+		String Filenm = "c:\\classinterview\\config.properties";
+
+		String retprop = getproperties(Filenm);
+		String[] allprop = retprop.split(",");
+		String USER = allprop[0];
+		String PASS = allprop[1];
+
+		String retrec = callreaddb(DB_URL, USER, PASS, tblnm);
+
+		// ================================================================
+		// To get the rows Split on XXX
+		// To Get the Columns Split on ,
+		// ===============================================================
+
+		String[] row = retrec.split("XXX"); // john,1,12XXXnancy,2,12XXXrabeca
+											// row[0] row[1] row[2]
+		// String nm=row[0].split(",")[0];
+		// String age=row[0].split(",")[1];
+		// String dept=row[0].split(",")[2];
+
+		for (int i = 0; i < row.length; i++) {
+			System.out.println("row" + i + "." + row[i]); // john,1,12
+															// Nancy,2,12
+
+			String nm = row[i].split(",")[0];
+			String age = row[i].split(",")[1];
+			String dept = row[i].split(",")[2];
+
+			// Screenload(nm,age,dept); // john,1,12
+			// Nance=y,2,12
+
+		}
+	}
+
+	
+
+	
