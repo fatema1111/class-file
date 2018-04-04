@@ -59,6 +59,7 @@ public class ojdbcconnection
 		String retrec1 = puserid + "," + ppassword + "," + ph1 + "," + purl;
 		return retrec1;
 
+
 	}
 	
 	
@@ -98,6 +99,79 @@ Github  ==> Master
             PTC90  ==> Branch
 
 Jenkins ==> Github  ==>  BranchName :  PTC90
+
+
+
+	Read Config File and Get Excel File Name   
+                
+Read the Excel and Get the URL,INPUT and Expected Result
+split
+invoke the URL
+Split INPUT and get Userid,Password
+populate the screen from Input split
+
+
+Click on Login
+Connect to db and Verify userid,pass word exist
+if exist and welcome screen then Status="passed"
+Write to Excel the Result
+
+Crete Package UTIL
+1) dbprog
+2) Read excel
+3) ReadConfig
+4) Excelwrite
+
+String Excelfilenm=readconfig(C:\\test\\config.properties");
+String  Res = readExcel(Excelfilenm)   //TCNO,TCDESC,INPUT,EXP
+String TCNO=Res.split(";")[0]
+String TCDESC=Res.split(";")[1]
+String INPUT=Res.split(";")[2]
+String User=INPUT.split(',')[1]
+String PASS=INPUT.split(',')[2];
+String SQL=INPUT.split(',')[3];
+
+String URL=INPUT.split(',')[0];
+String status="";
+driver.get(URL)
+driver.findElements(By.id('xxx')).sendKeys(User);
+driver.findElements(By.id('xxx')).sendKeys(PASS);
+driver.findElements(By.id('login')).click();
+String Title=driver.getTitle();
+Boolean res1=getdb(SQL);
+if (res1) && (Title.equals('welcome'))
+{
+  ActRES="Loggedin"
+  status="passed";
+}
+WriteExcel (TCNO,TCDESC,INPUT,EXPRES,ACTRES,status);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Userid
+Password
+
+
+Login  
+
+
+TCNO     TCDESC            Input     Expected        Actual   P/F   
+
+TC01    validate Login    xxxx         login        Error      F
+
+
+
 
 
 	
